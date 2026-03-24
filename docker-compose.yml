@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   # Frontend & Backend
-  web:
+  staysalad_web:
     build: .
     container_name: staysalad_web
     ports:
@@ -13,16 +13,16 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=3000
-      - MONGODB_URI=mongodb://db:27017/staysalad
-      - JWT_SECRET=super-secret-key-staysalad-2026
+      - MONGODB_URI=mongodb://mongodb:27017/staysalad
+      - JWT_SECRET=2d2b8b9afef2e2cddc353e3ddcd4a6bf17a4eadZ
     depends_on:
-      - db
+      - mongodb
     command: npm run dev
 
   # Database
-  db:
+  mongodb:
     image: mongo:latest
-    container_name: staysalad_db
+    container_name: staysalad_mongodb
     ports:
       - "27017:27017"
     volumes:

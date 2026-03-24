@@ -1,26 +1,15 @@
-<script>
-export default {
-  async asyncData({ $axios }) {
-    try {
-      const { data } = await $axios.get('/api/settings')
-      return { settings: data.data }
-    } catch (e) {
-      return { settings: { aboutPage: { richText: '' } } }
-    }
-  }
-}
-</script>
+<template>
   <div class="about-page">
     <section class="section about-intro">
       <div class="container fade-in-up">
         <div class="grid align-items-center">
           <div class="col-12 col-6">
             <h1 class="mb-4">Nossa História</h1>
-            <p class="mb-4 text-large" v-html="settings.aboutPage.richText">
+            <p class="mb-4 text-large" v-if="settings && settings.aboutPage" v-html="settings.aboutPage.richText || defaultText">
             </p>
           </div>
           <div class="col-12 col-6">
-            <img :src="settings.aboutPage.image || 'https://images.unsplash.com/photo-1510627958211-0f4fec900986?auto=format&fit=crop&w=1200&q=80'" alt="StaySalad Story" class="about-image about-image--offset">
+            <img :src="(settings && settings.aboutPage && settings.aboutPage.image) || 'https://images.unsplash.com/photo-1510627958211-0f4fec900986?auto=format&fit=crop&w=1200&q=80'" alt="StaySalad Story" class="about-image about-image--offset">
           </div>
         </div>
       </div>
@@ -48,6 +37,26 @@ export default {
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  async asyncData({ $axios }) {
+    try {
+      const { data } = await $axios.get('/api/settings')
+      return { settings: data.data || {} }
+    } catch (e) {
+      console.error('Erro ao buscar settings:', e)
+      return { settings: {} }
+    }
+  },
+  data() {
+    return {
+      settings: null,
+      defaultText: 'A StaySalad nasceu de um desejo simples: tornar a comida de verdade acessível, rápida e, acima de tudo, deliciosa. Acreditamos que uma salada não precisa ser apenas um acompanhamento sem graça, mas sim a estrela do seu dia.'
+    }
+  }
+}
+</script>
 
 <style scoped>
 .about-intro {

@@ -2,13 +2,21 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-// GET all products
+// GET all products with filtering
 router.get('/', async (req, res) => {
   try {
     const { category, featured } = req.query;
     let query = {};
-    if (category) query.category = category;
-    if (featured) query.isFeatured = true;
+    
+    if (category && category !== 'all' && category !== 'Todos') {
+      // Find category by name or id if necessary, but here we expect the name from the frontend
+      const cat = await require('../models/Category').findOne({ name: category });
+      if (cat) query.category = cat._id;
+    }
+    
+    if (featured === 'true' || featured === true) {
+      query.isFeatured = true;
+    }
 
     const products = await Product.find(query).populate('category');
     res.json({ success: true, data: products });

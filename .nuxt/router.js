@@ -14,6 +14,7 @@ const _0c1fed7e = () => interopDefault(import('..\\pages\\admin\\login.vue' /* w
 const _561481cd = () => interopDefault(import('..\\pages\\admin\\produtos\\index.vue' /* webpackChunkName: "pages/admin/produtos/index" */))
 const _6cdd43e2 = () => interopDefault(import('..\\pages\\admin\\produtos\\novo.vue' /* webpackChunkName: "pages/admin/produtos/novo" */))
 const _df254484 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _3c829375 = () => interopDefault(import('..\\pages\\admin\\produtos\\_id.vue' /* webpackChunkName: "pages/admin/produtos/_id" */))
 
 const emptyFn = () => {}
 
@@ -66,6 +67,10 @@ export const routerOptions = {
     path: "/",
     component: _df254484,
     name: "index"
+  }, {
+    path: "/admin/produtos/:id",
+    component: _3c829375,
+    name: "admin-produtos-id"
   }],
 
   fallback: false

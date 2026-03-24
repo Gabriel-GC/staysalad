@@ -54,11 +54,11 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // No servidor (SSR), o Nuxt precisa do host/porta completo se não estiver na porta 80
+    // SSR no Docker: usa o nome do serviço definido no docker-compose
     baseURL: process.env.NODE_ENV === 'production' 
       ? 'http://staysalad_web:3000' 
       : 'http://localhost:3000',
-    // No navegador, caminhos relativos funcionam
+    // Cliente: usa caminhos relativos a partir da raiz (as chamadas no código já incluem /api)
     browserBaseURL: '/'
   },
 

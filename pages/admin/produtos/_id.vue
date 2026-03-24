@@ -1,6 +1,6 @@
 <template>
   <div class="admin-product-form">
-    <h1 class="mb-4">Novo Produto</h1>
+    <h1 class="mb-4">Editar Produto</h1>
     
     <div class="card shadow-sm p-4 bg-white rounded">
       <form @submit.prevent="saveProduct">
@@ -8,10 +8,10 @@
           <div class="col-12 col-8">
             <div class="form-group mb-3">
               <label>Nome do Produto</label>
-              <input v-model="product.name" type="text" class="form-control" required placeholder="Ex: Salada Mix">
+              <input v-model="product.name" type="text" class="form-control" required>
             </div>
             <div class="form-group mb-3">
-              <label>Descrição Curta</label>
+              <label>Descrição</label>
               <textarea v-model="product.description" class="form-control" rows="3" required></textarea>
             </div>
             <div class="grid">
@@ -36,7 +36,7 @@
           <div class="col-12 col-4">
             <div class="form-group mb-3">
               <label>URL da Imagem</label>
-              <input v-model="product.image" type="text" class="form-control" placeholder="https://...">
+              <input v-model="product.image" type="text" class="form-control">
               <div v-if="product.image" class="mt-3">
                 <img :src="product.image" class="img-preview rounded shadow-sm">
               </div>
@@ -51,7 +51,7 @@
 
         <div class="mt-4">
           <button type="submit" class="btn btn--primary" :disabled="saving">
-            {{ saving ? 'Criando...' : 'Criar Produto' }}
+            {{ saving ? 'Salvando...' : 'Salvar Alterações' }}
           </button>
           <NuxtLink to="/admin/produtos" class="btn btn--secondary ml-1">Cancelar</NuxtLink>
         </div>
@@ -63,12 +63,16 @@
 <script>
 export default {
   layout: 'admin',
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, params }) {
     try {
-      const categoriesRes = await $axios.get('/api/categories')
+      const [categoriesRes, productRes] = await Promise.all([
+        $axios.get('/api/categories'),
+        $axios.get(`/api/products/${params.id}`)
+      ])
+      
       return {
         categories: categoriesRes.data.data,
-        product: { name: '', description: '', price: 0, category: '', image: '', isFeatured: false }
+        product: productRes.data.data
       }
     } catch (e) {
       console.error(e)
@@ -84,11 +88,11 @@ export default {
     async saveProduct() {
       this.saving = true
       try {
-        await this.$axios.post('/api/products', this.product)
-        this.$noty.success('Produto criado com sucesso!')
+        await this.$axios.patch(`/api/products/${this.product._id}`, this.product)
+        this.$noty.success('Produto atualizado com sucesso!')
         this.$router.push('/admin/produtos')
       } catch (e) {
-        this.$noty.error('Erro ao criar produto')
+        this.$noty.error('Erro ao atualizar produto')
       } finally {
         this.saving = false
       }

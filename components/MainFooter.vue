@@ -27,7 +27,7 @@
               </h4>
               <ul class="footer__list" :class="{ 'is-open': activeIndex === index || isDesktop }">
                 <li v-for="link in section.links" :key="link.label">
-                  <NuxtLink :to="link.url">{{ link.label }}</NuxtLink>
+                  <NuxtLink :to="link.url" :class="{ 'is-highlight': link.highlight }">{{ link.label }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -77,7 +77,7 @@ export default {
             { label: 'Contato', url: '/contato' },
             { label: 'FAQ', url: '#' },
             { label: 'Termos de Uso', url: '#' },
-            { label: 'Privacidade', url: '#' }
+            { label: 'Área do Admin', url: '/admin', highlight: true }
           ]
         }
       ]
@@ -215,5 +215,9 @@ export default {
   border-top: 1px dotted rgba(0,0,0,0.1);
   font-size: 13px;
   color: var(--text-muted);
+}
+.footer__link.is-highlight {
+  color: var(--primary);
+  font-weight: 700;
 }
 </style>

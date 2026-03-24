@@ -9,16 +9,26 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-staysalad-2026';
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    console.log(`[AUTH] Tentativa de login para: ${username}`);
     
-    if (!user || !(await user.comparePassword(password))) {
-      return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+    const user = await User.findOne({ username });
+    if (!user) {
+      console.log(`[AUTH] Usuário não encontrado: ${username}`);
+      return res.status(401).json({ success: false, message: 'Usuário não encontrado' });
     }
+    
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      console.log(`[AUTH] Senha incorreta para: ${username}`);
+      return res.status(401).json({ success: false, message: 'Senha incorreta' });
+    }
+
+    console.log(`[AUTH] Login bem-sucedido: ${username}`);
 
     const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: '1d' });
     
     // Set cookie
-    res.cookie('auth_token', token, {
+    res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 24 * 60 * 60 * 1000 // 1 day
@@ -32,14 +42,14 @@ router.post('/login', async (req, res) => {
 
 // POST Logout
 router.post('/logout', (req, res) => {
-  res.clearCookie('auth_token');
+  res.clearCookie('token');
   res.json({ success: true, message: 'Logged out' });
 });
 
 // GET Me (Check auth)
 router.get('/me', async (req, res) => {
   try {
-    const token = req.cookies.auth_token;
+    const token = req.cookies.token;
     if (!token) return res.status(401).json({ success: false });
 
     const decoded = jwt.verify(token, JWT_SECRET);
