@@ -1,0 +1,14 @@
+{
+  "CookieConsent": {
+    "description": "Auto imported from components/CookieConsent.vue"
+  },
+  "MainFooter": {
+    "description": "Auto imported from components/MainFooter.vue"
+  },
+  "MobileFooter": {
+    "description": "Auto imported from components/MobileFooter.vue"
+  },
+  "ProductCard": {
+    "description": "Auto imported from components/ProductCard.vue"
+  }
+}

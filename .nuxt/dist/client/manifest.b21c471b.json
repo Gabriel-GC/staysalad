@@ -1,0 +1,9 @@
+{
+  "name": "StaySalad",
+  "short_name": "staysalad",
+  "icons": [],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "pt-BR"
+}

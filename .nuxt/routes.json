@@ -1,0 +1,62 @@
+[
+  {
+    "name": "admin",
+    "path": "/admin",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\index.vue",
+    "chunkName": "pages/admin/index"
+  },
+  {
+    "name": "contato",
+    "path": "/contato",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\contato.vue",
+    "chunkName": "pages/contato"
+  },
+  {
+    "name": "produtos",
+    "path": "/produtos",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\produtos.vue",
+    "chunkName": "pages/produtos"
+  },
+  {
+    "name": "quem-somos",
+    "path": "/quem-somos",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\quem-somos.vue",
+    "chunkName": "pages/quem-somos"
+  },
+  {
+    "name": "admin-categorias",
+    "path": "/admin/categorias",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\categorias\\\\index.vue",
+    "chunkName": "pages/admin/categorias/index"
+  },
+  {
+    "name": "admin-configuracoes",
+    "path": "/admin/configuracoes",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\configuracoes.vue",
+    "chunkName": "pages/admin/configuracoes"
+  },
+  {
+    "name": "admin-login",
+    "path": "/admin/login",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\login.vue",
+    "chunkName": "pages/admin/login"
+  },
+  {
+    "name": "admin-produtos",
+    "path": "/admin/produtos",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\produtos\\\\index.vue",
+    "chunkName": "pages/admin/produtos/index"
+  },
+  {
+    "name": "admin-produtos-novo",
+    "path": "/admin/produtos/novo",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\admin\\\\produtos\\\\novo.vue",
+    "chunkName": "pages/admin/produtos/novo"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\GabrielGC\\\\www\\\\staysalad\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
